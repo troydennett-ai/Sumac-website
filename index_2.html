@@ -1,0 +1,967 @@
+<title>Southern Utah Music & Arts Council</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Frank+Ruhl+Libre:ital,wght@0,400;0,500;0,600;1,400&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Tokens ---------- */
+  :root{
+    --ink:#1B1F2E;
+    --paper:#F2EEE4;
+    --paper-hi:#FBF9F3;
+    --paper-lo:#E6DFCE;
+    --clay:#B8471F;
+    --marigold:#DE9A2E;
+    --sage:#6E7A5C;
+
+    --bg:var(--paper);
+    --surface:var(--paper-hi);
+    --surface-2:var(--paper-lo);
+    --text:var(--ink);
+    --text-muted:#5B5748;
+    --accent:var(--clay);
+    --accent-2:var(--marigold);
+    --border:rgba(27,31,46,0.16);
+    --shadow:rgba(27,31,46,0.10);
+
+    /* the hero is a fixed "stage at night" panel in both themes */
+    --hero-bg:#1B2032;
+    --hero-bg-2:#12151F;
+    --hero-fg:#F2EEE4;
+    --hero-fg-muted:#B9B4A4;
+    --hero-accent:#DE9A2E;
+    --hero-accent-2:#D96C3E;
+    --hero-line:rgba(242,238,228,0.22);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#181B27;
+      --surface:#212739;
+      --surface-2:#2A3145;
+      --text:#F2EEE4;
+      --text-muted:#B7B2A2;
+      --accent:#E2895A;
+      --accent-2:#E7B559;
+      --border:rgba(242,238,228,0.16);
+      --shadow:rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#181B27;
+    --surface:#212739;
+    --surface-2:#2A3145;
+    --text:#F2EEE4;
+    --text-muted:#B7B2A2;
+    --accent:#E2895A;
+    --accent-2:#E7B559;
+    --border:rgba(242,238,228,0.16);
+    --shadow:rgba(0,0,0,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Frank Ruhl Libre", Georgia, "Times New Roman", serif;
+    font-size:17px;
+    line-height:1.6;
+    padding-inline:20px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  }
+
+  .wrap{max-width:1080px; margin-inline:auto;}
+  .prose{max-width:65ch;}
+
+  h1,h2,h3{
+    font-family:"Big Shoulders Display", "Arial Narrow", sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    text-wrap:balance;
+    margin:0;
+    font-weight:800;
+  }
+  .eyebrow{
+    font-family:"Fragment Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:0.72rem;
+  }
+  a{color:inherit;}
+  img,.aspect{max-width:100%;}
+
+  /* ---------- Nav ---------- */
+  .nav{
+    max-width:1080px;
+    margin-inline:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding-block:18px;
+    flex-wrap:wrap;
+  }
+  .nav-mark{
+    font-family:"Big Shoulders Display", sans-serif;
+    font-weight:900;
+    font-size:1.35rem;
+    letter-spacing:0.02em;
+  }
+  .nav-mark span{color:var(--accent);}
+  .nav-links{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    list-style:none;
+    margin:0; padding:0;
+    font-family:"Fragment Mono", monospace;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+  .nav-links a{text-decoration:none; border-bottom:1px solid transparent; padding-bottom:2px;}
+  .nav-links a:hover, .nav-links a:focus-visible{border-color:var(--accent);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(18,21,31,0.45) 0%, rgba(15,17,26,0.82) 65%, var(--hero-bg-2) 100%),
+      radial-gradient(ellipse 60% 55% at 78% 18%, rgba(222,154,46,0.25), transparent 60%),
+      url("hero-crowd-mist.jpg") center 30%/cover no-repeat;
+    color:var(--hero-fg);
+    border-radius:18px;
+    margin-top:6px;
+    padding:clamp(28px,5vw,56px) clamp(20px,5vw,48px) 0;
+    overflow:hidden;
+    position:relative;
+  }
+  .brandline{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+  .brand-acronym{
+    font-family:"Big Shoulders Display", sans-serif;
+    font-weight:900;
+    font-size:clamp(2.1rem,6vw,3.4rem);
+    letter-spacing:0.03em;
+    color:var(--hero-fg);
+    line-height:1;
+  }
+  .brand-full{
+    font-family:"Fragment Mono", monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--hero-fg-muted);
+  }
+  .hero-top{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    align-items:flex-start;
+    justify-content:space-between;
+  }
+  .stamp{
+    font-family:"Fragment Mono", monospace;
+    font-size:0.7rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    border:1.5px solid var(--hero-accent);
+    color:var(--hero-accent);
+    padding:7px 12px;
+    border-radius:999px;
+    transform:rotate(-3deg);
+    white-space:nowrap;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 8vw, 5.4rem);
+    line-height:0.92;
+    color:var(--hero-fg);
+    margin-top:18px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--hero-accent);
+  }
+  .hero-sub{
+    max-width:52ch;
+    color:var(--hero-fg-muted);
+    font-size:1.05rem;
+    margin-top:16px;
+    font-style:italic;
+  }
+  .hero-ctas{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:26px;
+  }
+  .btn{
+    font-family:"Fragment Mono", monospace;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    font-size:0.78rem;
+    text-decoration:none;
+    padding:13px 20px;
+    border-radius:999px;
+    display:inline-block;
+    border:1.5px solid currentColor;
+  }
+  .btn-solid{
+    background:var(--hero-accent);
+    color:var(--hero-bg-2);
+    border-color:var(--hero-accent);
+  }
+  .btn-outline{color:var(--hero-fg);}
+
+  .marquee{
+    margin-top:34px;
+    border-top:1px solid var(--hero-line);
+    padding-block:14px;
+    display:flex;
+    gap:36px;
+    overflow-x:auto;
+    font-family:"Fragment Mono", monospace;
+    font-size:0.74rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--hero-fg-muted);
+    white-space:nowrap;
+  }
+  .marquee b{color:var(--hero-accent-2); font-weight:600;}
+
+  .skyline{
+    display:block;
+    width:100%;
+    height:auto;
+    margin-top:22px;
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  section{padding-block:clamp(48px,7vw,84px);}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    flex-wrap:wrap;
+    border-bottom:2px solid var(--text);
+    padding-bottom:14px;
+    margin-bottom:34px;
+  }
+  .section-head h2{font-size:clamp(1.9rem,4.2vw,2.6rem);}
+  .section-head .eyebrow{color:var(--accent);}
+  .section-num{
+    font-family:"Fragment Mono",monospace;
+    color:var(--text-muted);
+    font-size:0.85rem;
+  }
+
+  /* ---------- Mission ---------- */
+  .mission blockquote{
+    margin:0;
+    font-size:clamp(1.3rem,3vw,1.7rem);
+    font-style:italic;
+    line-height:1.5;
+    border-left:4px solid var(--accent-2);
+    padding-left:24px;
+  }
+  .mission-foot{
+    margin-top:22px;
+    color:var(--text-muted);
+    font-size:0.95rem;
+    max-width:60ch;
+  }
+
+  /* ---------- Lineup / programs ---------- */
+  .bill{display:flex; flex-direction:column; gap:2px;}
+  .bill-row{
+    display:grid;
+    grid-template-columns:9.5rem 1fr;
+    gap:18px;
+    padding-block:22px;
+    border-top:1px solid var(--border);
+  }
+  .bill-row:last-child{border-bottom:1px solid var(--border);}
+  .bill-tag{
+    font-family:"Fragment Mono", monospace;
+    font-size:0.74rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-variant-numeric:tabular-nums;
+  }
+  .bill-body h3{
+    font-size:1.35rem;
+    text-transform:none;
+    letter-spacing:0;
+    font-weight:800;
+  }
+  .bill-body p{margin:8px 0 0; color:var(--text-muted); max-width:58ch;}
+  @media (max-width:560px){
+    .bill-row{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Stats ---------- */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .stat{
+    background:var(--surface);
+    padding:26px 18px;
+    text-align:center;
+  }
+  .stat b{
+    display:block;
+    font-family:"Big Shoulders Display", sans-serif;
+    font-size:clamp(2rem,5vw,2.8rem);
+    font-variant-numeric:tabular-nums;
+    color:var(--accent);
+    line-height:1;
+  }
+  .stat span{
+    display:block;
+    margin-top:8px;
+    font-family:"Fragment Mono",monospace;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--text-muted);
+  }
+  @media (max-width:700px){ .stats{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- Get involved ---------- */
+  .paths{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+  }
+  .path{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:26px 22px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    box-shadow:0 6px 18px var(--shadow);
+  }
+  .path h3{font-size:1.2rem; letter-spacing:0.02em;}
+  .path p{margin:0; color:var(--text-muted); font-size:0.96rem; flex-grow:1;}
+  .path a{
+    font-family:"Fragment Mono",monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    text-decoration:none;
+    color:var(--accent);
+    border-bottom:1px solid var(--accent);
+    align-self:flex-start;
+    padding-bottom:2px;
+  }
+  @media (max-width:800px){ .paths{grid-template-columns:1fr;} }
+
+  /* ---------- Book the stage ---------- */
+  .book-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:32px;
+    align-items:start;
+  }
+  .book-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:28px 26px;
+    box-shadow:0 6px 18px var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .book-card .eyebrow{color:var(--text-muted);}
+  .book-btn{align-self:flex-start;}
+  .book-alt{
+    font-family:"Fragment Mono",monospace;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--accent);
+    text-decoration:none;
+    border-bottom:1px solid var(--accent);
+    align-self:flex-start;
+    padding-bottom:2px;
+  }
+  .book-backup{
+    margin-top:6px;
+    padding-top:14px;
+    border-top:1px solid var(--border);
+    font-size:0.94rem;
+  }
+  .book-backup .k{
+    display:block;
+    font-family:"Fragment Mono",monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--text-muted);
+    margin-bottom:4px;
+  }
+  .book-backup a{
+    color:var(--text);
+    text-decoration:none;
+    border-bottom:1px solid var(--border);
+  }
+  @media (max-width:760px){ .book-grid{grid-template-columns:1fr;} }
+
+  /* ---------- Board (backstage passes) ---------- */
+  .passes{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+    gap:16px;
+  }
+  .pass{
+    background:var(--surface-2);
+    border:1px dashed var(--border);
+    border-radius:10px;
+    padding:16px 16px 14px;
+    position:relative;
+  }
+  .pass::before{
+    content:"";
+    position:absolute;
+    top:-6px; left:16px;
+    width:22px; height:12px;
+    background:var(--accent-2);
+    border-radius:0 0 4px 4px;
+    opacity:0.8;
+  }
+  .pass .eyebrow{color:var(--text-muted);}
+  .pass h3{
+    margin-top:8px;
+    font-size:1.08rem;
+    letter-spacing:0;
+    text-transform:none;
+    font-weight:700;
+  }
+  .pass p{margin:4px 0 0; font-family:"Fragment Mono",monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--accent);}
+
+  /* ---------- Our stage ---------- */
+  .stage-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:start;
+  }
+  .stage-fact{
+    border-top:1px solid var(--border);
+    padding-block:14px;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    font-size:0.95rem;
+  }
+  .stage-fact:last-child{border-bottom:1px solid var(--border);}
+  .stage-fact span:first-child{color:var(--text-muted); font-family:"Fragment Mono",monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; padding-top:2px;}
+  .stage-fact span:last-child{text-align:right; max-width:30ch;}
+  @media (max-width:760px){ .stage-grid{grid-template-columns:1fr;} .stage-fact span:last-child{text-align:left;} .stage-fact{flex-direction:column; gap:4px;} }
+
+  /* ---------- Gallery (coming soon) ---------- */
+  .board{
+    background:var(--surface-2);
+    border-radius:14px;
+    padding:22px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:14px;
+  }
+  .slot{
+    aspect-ratio:4/3;
+    border:2px dashed var(--border);
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    color:var(--text-muted);
+    font-family:"Fragment Mono",monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    text-align:center;
+    padding:10px;
+  }
+  .slot::before{
+    content:"";
+    position:absolute;
+    top:8px; left:50%;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--accent-2);
+    transform:translateX(-50%);
+    box-shadow:0 1px 3px var(--shadow);
+  }
+  .gallery-note{margin-top:16px; color:var(--text-muted); font-size:0.92rem; max-width:60ch;}
+  .slot.filled{ padding:0; border:1px solid var(--border); overflow:hidden; }
+  .slot.filled::before{ display:none; }
+  .slot.filled img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .video-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:14px;
+    margin-bottom:14px;
+  }
+  .video-card{
+    position:relative;
+    aspect-ratio:16/9;
+    border-radius:8px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    background:#0d0f16;
+    cursor:pointer;
+    box-shadow:0 6px 18px var(--shadow);
+  }
+  .video-card img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    opacity:0.82; transition:opacity .2s, transform .3s;
+  }
+  .video-card:hover img{ opacity:1; transform:scale(1.03); }
+  .video-card .play-btn{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    pointer-events:none;
+  }
+  .video-card iframe{ width:100%; height:100%; border:0; display:block; }
+  .video-card .vc-label{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:8px 10px 7px;
+    background:linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
+    color:#F2EEE4;
+    font-family:"Fragment Mono",monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    pointer-events:none;
+  }
+
+  /* ---------- Contact / footer ---------- */
+  footer{
+    background:var(--hero-bg);
+    color:var(--hero-fg);
+    border-radius:18px;
+    padding:clamp(30px,5vw,50px);
+    margin-bottom:26px;
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:32px;
+  }
+  footer h2{color:var(--hero-fg); font-size:clamp(1.8rem,4vw,2.3rem);}
+  footer .eyebrow{color:var(--hero-accent);}
+  .contact-list{list-style:none; margin:18px 0 0; padding:0; font-size:1rem;}
+  .contact-list li{padding-block:10px; border-top:1px solid var(--hero-line);}
+  .contact-list a{text-decoration:none; color:var(--hero-fg);}
+  .contact-list a:hover{color:var(--hero-accent);}
+  .contact-list .k{
+    display:block;
+    font-family:"Fragment Mono",monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--hero-fg-muted);
+    margin-bottom:3px;
+  }
+  .fine{
+    margin-top:30px;
+    padding-top:18px;
+    border-top:1px solid var(--hero-line);
+    color:var(--hero-fg-muted);
+    font-size:0.8rem;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    font-family:"Fragment Mono",monospace;
+  }
+  @media (max-width:700px){ .contact-grid{grid-template-columns:1fr;} }
+</style>
+
+<div class="wrap nav">
+  <div class="nav-mark">SUM<span>A</span>C</div>
+  <ul class="nav-links">
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#lineup">The Lineup</a></li>
+    <li><a href="#book">Book the Stage</a></li>
+    <li><a href="#involved">Get Involved</a></li>
+    <li><a href="#stage">Our Stage</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="brandline">
+      <span class="brand-acronym">SUMAC</span>
+      <span class="brand-full">Southern Utah Music &amp; Arts Council</span>
+    </div>
+    <div class="hero-top">
+      <div class="stamp">No ticket · No cover · All ages</div>
+      <div class="stamp" style="transform:rotate(2deg);">Ivins, Utah</div>
+    </div>
+    <h1>Free music.<br>Free art.<br><em>Every age.</em></h1>
+    <p class="hero-sub">Southern Utah Music &amp; Arts Council runs the outdoor stage in Ivins where live bands, teaching artists, and open-mic regulars play to a crowd that never pays a cover &mdash; because none of our roughly 80 shows a season ever charge one.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-solid" href="#lineup">See what's on</a>
+      <a class="btn btn-outline" href="#involved">Get involved</a>
+    </div>
+
+    <div class="marquee">
+      <span>Ivins outdoor stage</span>
+      <span><b>80+</b> free shows a season</span>
+      <span><b>100%</b> free admission, always</span>
+      <span>Live music &middot; open mic &middot; art classes</span>
+      <span>Leased from The Icebox Grill &middot; $1/yr</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="mission" class="mission">
+    <div class="section-head">
+      <div><p class="eyebrow">01 &middot; Mission</p><h2>Why we do this</h2></div>
+      <p class="section-num">Ivins, Washington County, Utah</p>
+    </div>
+    <blockquote>&ldquo;Live music and the arts should be accessible to every resident regardless of income &mdash; removing cost as a barrier is the core reason our organization exists.&rdquo;</blockquote>
+    <p class="mission-foot">Unlike most local live-music venues, which operate inside bars or restaurants and require a purchase, every one of our events is fully open to the public: no ticket, no minimum, no age limit. We don't offer discounts to select groups &mdash; we skip the cost for everyone, every time.</p>
+  </section>
+
+  <section id="lineup">
+    <div class="section-head">
+      <div><p class="eyebrow">02 &middot; Programming</p><h2>The lineup</h2></div>
+      <p class="section-num">~80 performance &middot; 8 exhibit &middot; 14 event days a year</p>
+    </div>
+    <div class="bill">
+      <div class="bill-row">
+        <div class="bill-tag">Season-long<br>Outdoor stage</div>
+        <div class="bill-body">
+          <h3>Live music nights</h3>
+          <p>Touring and local bands, plus paid teaching artists, take the outdoor stage at 27 N 200 E all season long &mdash; sound and lighting run by our own crew, every show free to walk up to.</p>
+        </div>
+      </div>
+      <div class="bill-row">
+        <div class="bill-tag">Open floor<br>All skill levels</div>
+        <div class="bill-body">
+          <h3>Open mic nights</h3>
+          <p>A standing night where musicians at any level plug in, play, and learn from each other &mdash; the peer-to-peer half of our music community, not a performance for an audience.</p>
+        </div>
+      </div>
+      <div class="bill-row">
+        <div class="bill-tag">Hands-on<br>No cost</div>
+        <div class="bill-body">
+          <h3>Public art &amp; painting classes</h3>
+          <p>Free, open-to-the-public instruction in painting and visual art, building skill in the community rather than just staging performances for it.</p>
+        </div>
+      </div>
+      <div class="bill-row">
+        <div class="bill-tag">Partnership<br>Youth</div>
+        <div class="bill-body">
+          <h3>School of Rock student concert</h3>
+          <p>An annual student showcase hosted on our stage, with the same offer extended to any Washington County School District group or club that wants to perform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="section-head">
+      <div><p class="eyebrow">03 &middot; Book the stage</p><h2>Want the stage?</h2></div>
+      <p class="section-num">Stage &amp; Booking Coordinator</p>
+    </div>
+    <div class="book-grid">
+      <div class="prose">
+        <p>Bands, teaching artists, open-mic hopefuls, and community or school groups can request our outdoor stage directly through <strong>Ronarae Adams</strong>, our Stage &amp; Booking Coordinator. Send her your act, your availability, and what you'd like to play &mdash; every slot stays free for the audience, whoever's up there.</p>
+      </div>
+      <div class="book-card">
+        <p class="eyebrow">Reach Ronarae Adams</p>
+        <a class="btn btn-solid book-btn" href="https://m.me/ronarae.adams" target="_blank" rel="noopener noreferrer">Message on Messenger</a>
+        <a class="book-alt" href="https://facebook.com/ronarae.adams" target="_blank" rel="noopener noreferrer">View Facebook profile &rarr;</a>
+        <div class="book-backup">
+          <span class="k">Backup contact</span>
+          <a href="mailto:troydennett@gmail.com?subject=Booking%20the%20SUMAC%20stage">Troy Dennett, President &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stats-strip">
+    <div class="stats">
+      <div class="stat"><b>80+</b><span>Free shows a season</span></div>
+      <div class="stat"><b>100%</b><span>Events with no cover, ever</span></div>
+      <div class="stat"><b>7</b><span>Volunteers running the season</span></div>
+      <div class="stat"><b>$1</b><span>Annual stage lease</span></div>
+    </div>
+  </section>
+
+  <section id="involved">
+    <div class="section-head">
+      <div><p class="eyebrow">04 &middot; Join in</p><h2>Get involved</h2></div>
+      <p class="section-num">Volunteer &middot; sponsor &middot; play</p>
+    </div>
+    <div class="paths">
+      <div class="path">
+        <h3>Volunteer</h3>
+        <p>Our season runs on 7 unpaid volunteers handling everything from set-up to sound checks. More hands mean a longer, better season for everyone in the audience.</p>
+        <a href="mailto:troydennett@gmail.com?subject=Volunteering%20with%20SUMAC">Sign up to help &rarr;</a>
+      </div>
+      <div class="path">
+        <h3>Support &amp; sponsor</h3>
+        <p>Corporate sponsors, local businesses, and individual donors fund the artist fees and sound &amp; lighting that keep admission free for everyone who shows up.</p>
+        <a href="mailto:troydennett@gmail.com?subject=Sponsoring%20SUMAC">Ask about sponsoring &rarr;</a>
+      </div>
+      <div class="path">
+        <h3>Perform or partner</h3>
+        <p>Bands, teaching artists, school groups, and fellow Washington County arts organizations &mdash; our stage is open to partnerships that put more free programming in front of residents.</p>
+        <a href="#book">See how to book the stage &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="board">
+    <div class="section-head">
+      <div><p class="eyebrow">05 &middot; Backstage</p><h2>Who runs it</h2></div>
+      <p class="section-num">Board of directors</p>
+    </div>
+    <div class="passes">
+      <div class="pass"><p class="eyebrow">All-access</p><h3>Troy Dennett</h3><p>President</p></div>
+      <div class="pass"><p class="eyebrow">All-access</p><h3>Jayma Dennett</h3><p>Secretary</p></div>
+      <div class="pass"><p class="eyebrow">All-access</p><h3>Cheyne McDonald</h3><p>Treasurer</p></div>
+      <div class="pass"><p class="eyebrow">All-access</p><h3>Susan McDonald</h3><p>Director</p></div>
+      <div class="pass"><p class="eyebrow">All-access</p><h3>Kerri Hancock</h3><p>Director</p></div>
+    </div>
+  </section>
+
+  <section id="stage">
+    <div class="section-head">
+      <div><p class="eyebrow">06 &middot; The venue</p><h2>Our stage</h2></div>
+      <p class="section-num">27 N 200 E, Ivins</p>
+    </div>
+    <div class="stage-grid">
+      <div class="prose">
+        <p>Our outdoor stage sits on land leased from <strong>The Icebox Grill</strong> in Ivins for a nominal $1 a year &mdash; a genuine community partnership, not a discount. It's what lets us run a full season of professional sound and lighting without ever charging at the gate.</p>
+        <p>Between shows, the same stage hosts open mics, student concerts, and art classes &mdash; keeping the space in near-constant use rather than sitting dark between headline nights.</p>
+      </div>
+      <div>
+        <div class="stage-fact"><span>Address</span><span>27 N 200 E, Ivins, UT</span></div>
+        <div class="stage-fact"><span>Landlord</span><span>The Icebox Grill</span></div>
+        <div class="stage-fact"><span>Lease</span><span>$1 / year</span></div>
+        <div class="stage-fact"><span>Season</span><span>~80 performance days a year</span></div>
+        <div class="stage-fact"><span>Access</span><span>Free &amp; open to all ages, every event</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="section-head">
+      <div><p class="eyebrow">07 &middot; On the wall</p><h2>Photos &amp; video</h2></div>
+      <p class="section-num">From the 2026 season</p>
+    </div>
+    <div class="video-grid">
+      <div class="video-card" onclick="sumacPlayVideo(this,'WsSlIC1MsJc')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/WsSlIC1MsJc/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'buC7zu5G9zY')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/buC7zu5G9zY/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'1Pzpw_Ie0OE')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/1Pzpw_Ie0OE/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'z3MZAN7tgCA')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/z3MZAN7tgCA/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'FK6_A8sh9ds')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/FK6_A8sh9ds/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'3CiT76wfeaY')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/3CiT76wfeaY/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'mmGWyC6D1iU')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/mmGWyC6D1iU/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+  
+      <div class="video-card" onclick="sumacPlayVideo(this,'NRgkyG4VI4E')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/NRgkyG4VI4E/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'LRIwgOCfqEY')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/LRIwgOCfqEY/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'sUZtntdITYQ')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/sUZtntdITYQ/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'Oc7V4vHm7E8')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/Oc7V4vHm7E8/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'5ESyMczGbkE')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/5ESyMczGbkE/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'hbKjffk3Ijc')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/hbKjffk3Ijc/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'s-5q8_H1EWQ')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/s-5q8_H1EWQ/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'-2qxnV25JUc')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/-2qxnV25JUc/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'cKUrJKzZzWg')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/cKUrJKzZzWg/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'qr6Du0VS5Y4')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/qr6Du0VS5Y4/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'VPLEvhz-BN4')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/VPLEvhz-BN4/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'95vzLMhdLgk')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/95vzLMhdLgk/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'VsaExLgk-tQ')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/VsaExLgk-tQ/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+  
+      <div class="video-card" onclick="sumacPlayVideo(this,'bvqTppgwm_4')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/bvqTppgwm_4/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+  
+      <div class="video-card" onclick="sumacPlayVideo(this,'LBnEWRA7B2I')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/LBnEWRA7B2I/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+  
+      <div class="video-card" onclick="sumacPlayVideo(this,'lUM88xBzSqU')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/lUM88xBzSqU/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'pzEYqmpHHqM')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/pzEYqmpHHqM/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'ot3JTuBweRg')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/ot3JTuBweRg/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'nNxFum3nYcg')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/nNxFum3nYcg/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'SRTEQYaDfEs')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/SRTEQYaDfEs/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+      <div class="video-card" onclick="sumacPlayVideo(this,'8iBq7wK9Osg')">
+        <img loading="lazy" src="https://i.ytimg.com/vi/8iBq7wK9Osg/hqdefault.jpg" alt="SUMAC stage performance video">
+        <div class="play-btn"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(27,31,46,0.55)" stroke="#F2EEE4" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#F2EEE4"/></svg></div>
+        <div class="vc-label">On our stage</div>
+      </div>
+    </div>
+    <div class="board">
+      <div class="slot filled"><img src="stage-night-01.jpg" alt="Crowd gathered under the stage lights at a SUMAC show, band performing under red and gold lighting"></div>
+      <div class="slot filled"><img src="stage-band-mesozoic-01.jpg" alt="Band Mesozoic performing on the SUMAC stage under green and red lighting"></div>
+      <div class="slot filled"><img src="stage-crowd-mist-01.jpg" alt="Crowd dancing under misting fans at a SUMAC stage show"></div>
+      <div class="slot filled"><img src="stage-crowd-mist-02.jpg" alt="Crowd gathered at the SUMAC stage under string lights and stage fog"></div>
+      <div class="slot filled"><img src="stage-empty-blue-01.jpg" alt="The SUMAC outdoor stage set up before a show, lit in blue"></div>
+    </div>
+    <p class="gallery-note">We're building out this wall as the season is documented &mdash; photos from our shows, open mics, and art classes will be pinned up here as they come in.</p>
+  </section>
+
+</div>
+
+<div class="wrap">
+  <footer id="contact">
+    <p class="eyebrow">08 &middot; Reach us</p>
+    <div class="contact-grid">
+      <div>
+        <h2>Come see<br>a free show.</h2>
+        <p style="color:var(--hero-fg-muted); max-width:44ch; margin-top:14px;">Southern Utah Music &amp; Arts Council &middot; a community effort to keep live music and the arts free and open in Ivins, Utah.</p>
+      </div>
+      <ul class="contact-list">
+        <li><span class="k">Contact</span><a href="mailto:troydennett@gmail.com">Troy Dennett, President</a></li>
+        <li><span class="k">Phone</span><a href="tel:14356194488">435-619-4488</a></li>
+        <li><span class="k">Email</span><a href="mailto:troydennett@gmail.com">troydennett@gmail.com</a></li>
+        <li><span class="k">Mailing address</span><span>172 E 100 N, Ivins, UT 84738</span></li>
+        <li><span class="k">Stage</span><span>27 N 200 E, Ivins, UT</span></li>
+      </ul>
+    </div>
+    <div class="fine">
+      <span>&copy; <span id="year">2026</span> Southern Utah Music &amp; Arts Council</span>
+      <span>Ivins, Washington County, Utah</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  try{ document.getElementById('year').textContent = new Date().getFullYear(); }catch(e){}
+
+  function sumacPlayVideo(card, id){
+    card.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0" title="SUMAC performance video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    card.onclick = null;
+  }
+</script>
